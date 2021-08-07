@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const mongoIp = '127.0.0.1';
 const mongoPort = '27017';
-const mongoCollection = 'reposapp'
+const mongoCollection = 'test'
 
 const mongoDB = mongoose.connect(`mongodb://${mongoIp}:${mongoPort}/${mongoCollection}`,
     {
