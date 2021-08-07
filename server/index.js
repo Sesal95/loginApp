@@ -1,5 +1,7 @@
 const express = require('express');
 const createError = require('http-errors');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 
@@ -7,13 +9,17 @@ require('./drivers/mongo');
 
 const routes = require('./routes');
 
-//BodyParser
-app.use(express.urlencoded({extended : false}));
-
 app.use((req, res, next) => {
     req.port = 8000
     next();
 })
+
+// cors
+app.use(cors());
+
+// Takes the raw requests and turns them into usable properties on req.body
+app.use(bodyParser.json({ limit: '250mb' }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', routes);
 
