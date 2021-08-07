@@ -7,7 +7,7 @@ const usersSchema = new Schema({
         type: String,
         required: true,
     },
-    user: {
+    ghUser: {
         type: String,
         required: true,
     },
@@ -15,14 +15,14 @@ const usersSchema = new Schema({
         type: String,
         required: true,
     },
-    email: {
-        type: String,
-        required: true,
-    },
     date: {
         type: Date,
         default: Date.now,
     },
+    favRepos: {
+        type: Object[{}],
+        required: false,
+    }
 });
 
-module.exports = mongoose.model('users', usersSchema);
+module.exports = mongoose.model('appUsers', usersSchema);
