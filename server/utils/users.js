@@ -1,22 +1,21 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     validateRegister: (data) => {
         const { name, user, password, password2 } = data;
         const returnData = { success: true }
-        let errors = [];
         if (!name || !user || !password || !password2)  {
-            errors.push('\n -Please fill in all fields');
+            returnData.success = false;
+            returnData.error = 'Please fill all fields';
         }
         if (password !== password2) {
-            errors.push('\n -Passwords dont match');
+            returnData.success = false;
+            returnData.error = 'Passwords dont match';
         }
         if (password.length < 6) {
-            errors.push('\n -Password at least 6 characters');
-        }
-        if (errors.length > 0) {
             returnData.success = false;
-            returnData.err = errors;
+            returnData.error = 'Password at least 6 characters';
         }
         return returnData;
     },
@@ -29,5 +28,9 @@ module.exports = {
         return await bcrypt.hash(pass, 10).then(hash => {
             return hash
         })
+    },
+
+    generateToken: (id) => {
+        return jwt.sign({ id }, 'secretKey', { expiresIn: '1h' });
     },
 }

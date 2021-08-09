@@ -1,9 +1,12 @@
-const jwt = require('jsonwebtoken');
-
 const userUtils = require('../utils/users');
 const userModel = require('../models/users.model');
 
-const { validateRegister, comparePassword, encryptPassword } = userUtils;
+const {
+    validateRegister,
+    comparePassword,
+    encryptPassword,
+    generateToken,
+} = userUtils;
 
 module.exports = {
     register: async (data) => {
@@ -62,7 +65,7 @@ module.exports = {
             }
         }
         try {
-            const { password: userPass, __id: id } = userExists;
+            const { password: userPass, ghUser: user, name, __id: id } = userExists;
             const comparePass = await comparePassword(formPass, userPass);
             if (!comparePass) {
                 return {
@@ -70,11 +73,16 @@ module.exports = {
                     error: 'Invalid password',
                 }
             }
-            const token = jwt.sign({id},'secretKey', {expiresIn: '1h'});
+            const token = generateToken(id);
             return {
                 success: true,
                 message: 'Successfully logged',
                 token,
+                userData: {
+                    id,
+                    user,
+                    name,
+                }
             }
 
         } catch (e) {

@@ -19,10 +19,6 @@ const usersSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-    favRepos: {
-        type: Object[{}],
-        required: false,
-    }
 });
 
 module.exports = mongoose.model('appUsers', usersSchema);

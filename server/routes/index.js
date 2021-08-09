@@ -23,8 +23,6 @@ const loadDir = (dirname = __dirname, prefix = '') => {
 loadDir();
 
 router.route('/')
-    .get((req, res) => {
-        res.status(200).send({ status: 'Running' });
-    });
+  .get((req, res) => res.response(true, { status: 'Running', env: req.app.get('env'), app: req.constants.app.name }));
 
 module.exports = router;
