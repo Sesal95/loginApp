@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const accessGitHubToken = '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';
+const accessGitHubToken = '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';
 
 module.exports = {
     graphQuery: (user) => {
