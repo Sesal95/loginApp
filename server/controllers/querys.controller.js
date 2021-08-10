@@ -35,7 +35,8 @@ module.exports = {
     },
 
     pushPopMongoData: async (data) => {
-        const { id, user, name, url, state, } = data;
+        const { id, user, name, state, } = data;
+        const url = `https://github.com/${user}/${name}`;
         if (state) {
             try {
                 const newRepo = new querysModel({

@@ -28,10 +28,10 @@ router.use((req, res, next) => {
     }
 })
 
-router.get('/graphql', async (req, res) => {
-    const { body } = req;
+router.get('/graphql/:user', async (req, res) => {
+    const { params } = req;
     try {
-        const getGQLData = await graphQLData(body);
+        const getGQLData = await graphQLData(params);
         return res.status(200).send(getGQLData);
     } catch (e) {
         console.log(e);
@@ -42,10 +42,10 @@ router.get('/graphql', async (req, res) => {
     }
 });
 
-router.get('/mongoRepos', async (req, res) => {
-    const { body } = req;
+router.get('/mongoRepos/:user', async (req, res) => {
+    const { params } = req;
     try {
-        const mongoData = await getMongoData(body);
+        const mongoData = await getMongoData(params);
         return res.status(200).send(mongoData);
     } catch (e) {
         console.log(e);
@@ -56,10 +56,10 @@ router.get('/mongoRepos', async (req, res) => {
     }
 });
 
-router.post('/mongoRepos/pushpop', async (req, res) => {
-    const { body } = req;
+router.post('/mongoRepos/pushpop/:id/:name/:user/:state', async (req, res) => {
+    const { params } = req;
     try {
-        const pushpopData = await pushPopMongoData(body);
+        const pushpopData = await pushPopMongoData(params);
         return res.status(200).send(pushpopData);
     } catch (e) {
         console.log(e);

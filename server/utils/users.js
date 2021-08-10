@@ -31,6 +31,6 @@ module.exports = {
     },
 
     generateToken: (id) => {
-        return jwt.sign({ id }, 'secretKey', { expiresIn: '1h' });
+        return jwt.sign({ id }, 'secretKey', { expiresIn: '8h' });
     },
 }

@@ -79,7 +79,6 @@ module.exports = {
                 message: 'Successfully logged',
                 token,
                 userData: {
-                    id,
                     user,
                     name,
                 }
